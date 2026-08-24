@@ -2,37 +2,43 @@ class Solution {
     public boolean isValid(String s) {
 
         Stack<Character> st1 = new Stack<>();
-        Stack<Character> st2 = new Stack<>();
-
-        for(int i = 0 ; i < s.length(); i++){
-            Character c = s.charAt(i);
+        for(int i = 0 ; i< s.length();i++){
+            Character c =  s.charAt(i);
             st1.add(c);
-        }
+            switch(c){
+                case ')'->{
+                    st1.pop();
+                    if(st1.isEmpty()) return false;
+                    if(st1.peek() != '(') return false;
+                    else {
+                        
+                        st1.pop();
+                    }
 
-        while(!st1.isEmpty()){
-            Character c = st1.pop();
-            if(c == ')' || c== '}'|| c==']'){
-                st2.add(c);
-                
-            }
-            else{
-                
-                if(st2.isEmpty()) return false;
-                switch(c){
-                    case '(' -> {if(st2.peek() != ')')  return false;}
-                    case '{' -> {if(st2.peek() != '}')  return false;}
-                    case '[' -> {if(st2.peek() != ']')  return false;}
                 }
-                st2.pop();
-                
-                
+                case '}'->{
+                    st1.pop();
+                    if(st1.isEmpty()) return false;
+                    if(st1.peek() != '{') return false;
+                    else{ 
+                    st1.pop();
+                    }
+
+                }
+                case ']'->{
+                    st1.pop();
+                    if(st1.isEmpty()) return false;
+                    if(st1.peek() != '[') return false;
+                    else{ 
+                    st1.pop();
+                    }
+
+                }
                 
             }
-        }
-        if(!st2.isEmpty()){
-            return false;
-        }
 
+        }
+        if(!st1.isEmpty()) return false;
         return true;
         
     }
