@@ -6,10 +6,7 @@ class Solution {
         if(n == 1) return 1;
         int lf = distinct(al,n -1 );
         int rt = distinct(al,n - 2 );
-        
         al.add(lf + rt);
-        
-        
         return lf + rt;
     }
     public int climbStairs(int n) {
