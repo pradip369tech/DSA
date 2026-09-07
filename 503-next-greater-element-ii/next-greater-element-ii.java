@@ -4,13 +4,14 @@ class Solution {
         int [] count = new int[len];
         Arrays.fill(count, -1);
         
-        for(int i = 0 ; i< len ;i++){
-            for(int j = 1 ;j < len ;j++){
-                int k = (i+ j)%len;
+        for(int i = 0 ; i< len;i++){
+            
+            for(int k = 1 ;k < len ;k++){
+                int j = (i+k) % len;
                 // System.out.print(j);
-                if(nums[k] > nums[i]){
+                if(nums[j] > nums[i]){
 
-                    count[i] = nums[k];
+                    count[i] = nums[j];
                     
                     break; 
                 }
