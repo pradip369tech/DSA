@@ -1,23 +1,20 @@
 class Solution{
 
-    public static void backtrackSet(int n , int [] nums,List<Integer> current,List<List<Integer>>result){
-        if(n >= nums.length){
-            result.add(new ArrayList<>(current));
-            return;
-            
+    
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(new ArrayList<>()); 
+
+        for (int num : nums) {
+            int n = result.size();
+            for (int i = 0; i < n; i++) {
+                List<Integer> set = new ArrayList<>(result.get(i));
+                set.add(num);
+                result.add(set);
+            }
         }
-        current.add(nums[n]);
-        backtrackSet(n+1,nums,current,result);
-        current.remove(current.size() -1 );
-        backtrackSet(n+1,nums,current,result);
-
-
-    }
-    public static List<List<Integer>> subsets(int [] nums){
-        List<List<Integer>> result =  new ArrayList<>();
-        backtrackSet(0,nums,new ArrayList<>(),result);
         return result;
     }
-
-
 }
+
+
