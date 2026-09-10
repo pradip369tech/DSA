@@ -1,18 +1,16 @@
-import java.util.Stack;
-
 class Solution {
     public int[] asteroidCollision(int[] asteroids) {
-        Stack<Integer> stack = new Stack<>();
+        int[] stack = new int[asteroids.length];
+        int top = -1; 
 
         for (int a : asteroids) {
             boolean alive = true;
 
-            
-            while (alive && !stack.isEmpty() && stack.peek() > 0 && a < 0) {
-                if (stack.peek() < -a) {
-                    stack.pop(); 
-                } else if (stack.peek() == -a) {
-                    stack.pop(); 
+            while (alive && top >= 0 && stack[top] > 0 && a < 0) {
+                if (stack[top] < -a) {
+                    top--; 
+                } else if (stack[top] == -a) {
+                    top--; 
                     alive = false;
                 } else {
                     alive = false; 
@@ -20,13 +18,12 @@ class Solution {
             }
 
             if (alive) {
-                stack.push(a);
+                stack[++top] = a; 
             }
         }
-        int[] result = new int[stack.size()];
-        for (int i = result.length - 1; i >= 0; i--) {
-            result[i] = stack.pop();
-        }
+
+        int[] result = new int[top + 1];
+        System.arraycopy(stack, 0, result, 0, top + 1);
 
         return result;
     }
